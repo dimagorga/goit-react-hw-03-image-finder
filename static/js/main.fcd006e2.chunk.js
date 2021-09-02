@@ -1,2 +1,0 @@
-(this["webpackJsonpgoit-react-hw-03-image-finder"]=this["webpackJsonpgoit-react-hw-03-image-finder"]||[]).push([[0],{11:function(t,e,n){"use strict";n.r(e);var c=n(1),i=n.n(c),r=n(3),o=n.n(r),a=(n(8),n(9),n(0));var s=function(){return Object(a.jsx)("h1",{children:"Ghbdnt"})};o.a.render(Object(a.jsx)(i.a.StrictMode,{children:Object(a.jsx)(s,{})}),document.getElementById("root"))},8:function(t,e,n){},9:function(t,e,n){}},[[11,1,2]]]);
-//# sourceMappingURL=main.fcd006e2.chunk.js.map

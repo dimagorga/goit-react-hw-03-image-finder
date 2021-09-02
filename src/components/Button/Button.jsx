@@ -1,9 +1,18 @@
-import s from "./Button.module.css";
+import PropTypes from "prop-types";
 
-export default function Button({ type, name, onBtnClick }) {
+function Button({ type, name, onBtnClick, className }) {
   return (
-    <button className={s.Button} type={type} onClick={onBtnClick}>
+    <button className={className} type={type} onClick={onBtnClick}>
       {name}
     </button>
   );
 }
+
+Button.propTypes = {
+  type: PropTypes.string.isRequired,
+  name: PropTypes.string,
+  onBtnClick: PropTypes.func.isRequired,
+  className: PropTypes.string,
+};
+
+export default Button;

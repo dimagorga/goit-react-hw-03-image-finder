@@ -1,5 +1,9 @@
 import { Component } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import PropTypes from "prop-types";
+import "react-toastify/dist/ReactToastify.css";
 import s from "./Searchbar.module.css";
+import Button from "../Button/Button";
 
 class Searchbar extends Component {
   state = {
@@ -13,7 +17,9 @@ class Searchbar extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     if (this.state.input.trim() === "") {
-      alert("введите");
+      toast.info("Write something to find!", {
+        theme: "dark",
+      });
     }
     this.props.onSubmit(this.state.input);
     this.setState({ input: "" });
@@ -23,13 +29,11 @@ class Searchbar extends Component {
     return (
       <header className={s.Searchbar}>
         <form className={s.SearchForm} onSubmit={this.handleSubmit}>
-          <button
+          <Button
             type="submit"
-            onClick={this.handleSubmit}
+            onBtnClick={this.handleSubmit}
             className={s.SearchFormButton}
-          >
-            {/* <span className="SearchForm-button-label">Search</span> */}
-          </button>
+          />
           <input
             onChange={this.handleChange}
             className={s.SearchFormInput}
@@ -39,9 +43,14 @@ class Searchbar extends Component {
             placeholder="Search images and photos"
           />
         </form>
+        <ToastContainer />
       </header>
     );
   }
 }
+
+Searchbar.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
 
 export default Searchbar;

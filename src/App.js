@@ -36,31 +36,30 @@ class App extends Component {
     imagesApi
       .fetchImages(searchInput, page)
       .then((images) => {
-        if (page === 1) {
-          if (images.data.hits.length === 0) {
-            toast.error(`"${searchInput}" is not found`, {
-              theme: "dark",
-            });
-          }
-          this.setState({
-            images: images.data.hits,
+        if (images.data.hits.length === 0) {
+          toast.error(`"${searchInput}" is not found`, {
+            theme: "dark",
           });
-        } else {
-          this.setState((prevState) => ({
-            images: [...prevState.images, ...images.data.hits],
-          }));
-          window.scrollTo({
-            top: document.documentElement.scrollHeight,
-            behavior: "smooth",
-          });
-          console.log(this.state.images);
         }
+        this.setState((prevState) =>
+          page === 1
+            ? {
+                images: images.data.hits,
+              }
+            : {
+                images: [...prevState.images, ...images.data.hits],
+              }
+        );
+        window.scrollTo({
+          top: document.documentElement.scrollHeight,
+          behavior: "smooth",
+        });
       })
       .catch((error) => {
         const notify = () => toast(error.message);
         notify();
       })
-      .then(() => {
+      .finally(() => {
         this.setState({ isLoading: false });
       });
   };
@@ -79,10 +78,10 @@ class App extends Component {
     }));
   };
 
-  onModalOpen = (e) => {
+  onModalOpen = (largeImg) => {
     this.setState({
       showModal: true,
-      modal: e.target.dataset.source,
+      modal: largeImg,
     });
   };
 
